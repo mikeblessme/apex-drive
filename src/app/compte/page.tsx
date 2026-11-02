@@ -56,6 +56,7 @@ export default function ComptePage() {
         <div style={{ fontWeight: 700, marginBottom: 4 }}>Mes données locales</div>
         <div style={{ color: "var(--muted)", fontSize: 14 }}>{localParts.join(" · ")}</div>
         <p className="legal" style={{ marginTop: 8 }}>Tout reste sur cet appareil (aucun compte, aucun serveur) — tranche 1, sans backend.</p>
+        <p className="legal"><Link href="/confidentialite">Politique de confidentialité</Link></p>
       </div>
       <p className="hint">App Next.js — v13, arbre des centres, persistance locale. Données de parcours fictives.</p>
 
