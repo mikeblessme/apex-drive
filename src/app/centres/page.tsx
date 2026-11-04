@@ -15,7 +15,7 @@ export default function CentresPage() {
 
   return (
     <>
-      <h1>🌳 Arbre des centres</h1>
+      <h1>Arbre des centres</h1>
       <p className="lead">
         Tronc : Ontario. Branches : les 5 régions DriveTest. Feuilles : les centres.
         Touchez une branche pour la déplier, puis un centre pour voir sa fiche.
@@ -33,7 +33,7 @@ export default function CentresPage() {
             <circle cx="90" cy="42" r="14" /><circle cx="155" cy="37" r="14" /><circle cx="200" cy="32" r="14" />
             <circle cx="245" cy="37" r="14" /><circle cx="310" cy="42" r="14" />
           </g>
-          <text x="200" y="145" textAnchor="middle" fill="#eef3fb" fontSize="12" fontWeight="700">ONTARIO — 5 régions — 26 centres</text>
+          <text x="200" y="145" textAnchor="middle" fill="#eef3fb" fontSize="12" fontWeight="700">Ontario · 5 régions · 26 centres</text>
         </svg>
       </div>
       <label className="lbl" htmlFor="tree-search">Filtrer l&apos;arbre (ville ou centre)</label>
@@ -56,7 +56,7 @@ export default function CentresPage() {
               className="branch-head"
               onClick={() => setOpen((o) => ({ ...o, [region.id]: !o[region.id] }))}
             >
-              <span>🌿 {region.name}</span>
+              <span>{region.name}</span>
               <span><span className="cnt">{leaves.length} centre(s)</span> <span className="chev">›</span></span>
             </button>
             <div className="branch-body">
