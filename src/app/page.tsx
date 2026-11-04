@@ -50,8 +50,8 @@ export default function Home() {
           "Utiliser ma position"
         )}
       </button>
-      <p className="lead" style={{ textAlign: "center", margin: "14px 0 6px" }}>ou</p>
-      <Link className="btn secondary" href="/centres">🌳 Explorer l&apos;arbre des centres</Link>
+      <p className="lead" style={{ textAlign: "center", margin: "16px 0 8px" }}>ou</p>
+      <Link className="btn secondary" href="/centres">Explorer l&apos;arbre des centres</Link>
 
       <label className="lbl" htmlFor="search">Rechercher un centre</label>
       <input
@@ -88,7 +88,7 @@ export default function Home() {
           <h2>Centre le plus proche</h2>
           <div className="card center-card">
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <div style={{ fontWeight: 800, fontSize: 17 }}>{etobicoke.name}</div>
+              <div style={{ fontWeight: 600, fontSize: 16 }}>{etobicoke.name}</div>
               <div className="dist">à 3,2 km</div>
             </div>
             <div style={{ color: "var(--muted)", fontSize: 13.5, marginTop: 6 }}>{etobicoke.addr}</div>

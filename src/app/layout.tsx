@@ -21,11 +21,28 @@ export const viewport: Viewport = {
   themeColor: "#0a1424",
 };
 
+// Squelette de la coquille (barre d'app + contenu) pendant que Chrome
+// suspend au pré-rendu. Ne pas confondre avec loading.tsx, qui couvre le
+// contenu de page une fois la coquille montée.
+function ChromeSkeleton() {
+  return (
+    <div className="phone" role="status" aria-label="Chargement de l'application">
+      <header className="appbar"><span>Apex Drive 3D</span></header>
+      <main>
+        <div className="skel skel-title" />
+        <div className="skel skel-line" />
+        <div className="skel skel-line short" />
+        <div className="skel skel-block" />
+      </main>
+    </div>
+  );
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="fr">
       <body>
-        <Suspense>
+        <Suspense fallback={<ChromeSkeleton />}>
           <Chrome>{children}</Chrome>
         </Suspense>
       </body>
