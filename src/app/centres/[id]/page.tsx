@@ -16,7 +16,7 @@ export default async function CentrePage({ params }: { params: Promise<{ id: str
       <>
         <h1>Centre introuvable</h1>
         <p className="lead">Ce centre ne fait pas partie de l&apos;arbre des centres.</p>
-        <Link className="btn secondary" href="/centres">🌳 Retour à l&apos;arbre des centres</Link>
+        <Link className="btn secondary" href="/centres">Retour à l&apos;arbre des centres</Link>
       </>
     );
   }
