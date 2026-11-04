@@ -3,7 +3,19 @@
 import Link from "next/link";
 import { useState } from "react";
 import { MANOEUVRES, mapsUrl, type Centre, type RouteMeta } from "@/lib/data";
-import { Paywall, QuizSheet, TourSheet } from "@/components/ui";
+import dynamic from "next/dynamic";
+import SheetSkeleton from "@/components/SheetSkeleton";
+
+// Feuilles chargées en différé : voir le commentaire dans src/app/compte/page.tsx.
+const Paywall = dynamic(() => import("@/components/Paywall"), {
+  loading: () => <SheetSkeleton label="Chargement de l'accès complet" />,
+});
+const QuizSheet = dynamic(() => import("@/components/QuizSheet"), {
+  loading: () => <SheetSkeleton label="Chargement de l'examen blanc" />,
+});
+const TourSheet = dynamic(() => import("@/components/TourSheet"), {
+  loading: () => <SheetSkeleton label="Chargement de la visite guidée" />,
+});
 
 // Détail parcours (écran 4 de la maquette v13) — parcours 1 d'Etobicoke, gratuit.
 // Carte schématique DISTINCTE par parcours (tracé SVG propre à chaque parcours).
@@ -20,7 +32,7 @@ export default function ParcoursDetail({ route, centre }: { route: RouteMeta; ce
         <p className="lead">Ce parcours est verrouillé. Débloquez l&apos;accès complet pour le consulter.</p>
         <button className="btn" onClick={() => setPaywallOpen(true)}>Débloquer l&apos;accès complet</button>
         <Link className="btn secondary" href="/centres/etobicoke">Retour aux parcours</Link>
-        <Paywall open={paywallOpen} onClose={() => setPaywallOpen(false)} />
+        {paywallOpen && <Paywall open={paywallOpen} onClose={() => setPaywallOpen(false)} />}
       </>
     );
   }
@@ -75,8 +87,8 @@ export default function ParcoursDetail({ route, centre }: { route: RouteMeta; ce
       </div>
       <p className="legal">Parcours reconstitué — non officiel.</p>
 
-      <QuizSheet open={quizOpen} onClose={() => setQuizOpen(false)} />
-      <TourSheet open={tourOpen} onClose={() => setTourOpen(false)} />
+      {quizOpen && <QuizSheet open={quizOpen} onClose={() => setQuizOpen(false)} />}
+      {tourOpen && <TourSheet open={tourOpen} onClose={() => setTourOpen(false)} />}
     </>
   );
 }

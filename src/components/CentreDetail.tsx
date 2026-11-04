@@ -4,7 +4,14 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ETOBICOKE_ROUTES, mapsUrl, type Centre } from "@/lib/data";
 import { countdownText, useStore } from "@/lib/store";
-import { Paywall, Toast } from "@/components/ui";
+import dynamic from "next/dynamic";
+import { Toast } from "@/components/ui";
+import SheetSkeleton from "@/components/SheetSkeleton";
+
+// Feuille chargée en différé : voir le commentaire dans src/app/compte/page.tsx.
+const Paywall = dynamic(() => import("@/components/Paywall"), {
+  loading: () => <SheetSkeleton label="Chargement de l'accès complet" />,
+});
 
 // Fiche centre (écran 3 de la maquette v13).
 // Etobicoke : 5 parcours (1 gratuit, 2–5 verrouillés → paywall).
@@ -31,7 +38,7 @@ export default function CentreDetail({ centre }: { centre: Centre }) {
       <>
         <h1>Centre introuvable</h1>
         <p className="lead">Ce centre ne fait pas partie de l&apos;arbre des centres.</p>
-        <Link className="btn secondary" href="/centres">🌳 Retour à l&apos;arbre des centres</Link>
+        <Link className="btn secondary" href="/centres">Retour à l&apos;arbre des centres</Link>
       </>
     );
   }
@@ -109,7 +116,7 @@ export default function CentreDetail({ centre }: { centre: Centre }) {
         <div>
           <h2>Parcours de ce centre</h2>
           <div className="card">
-            <div style={{ fontWeight: 700, marginBottom: 4 }}>Parcours à venir</div>
+            <div style={{ fontWeight: 600, marginBottom: 4 }}>Parcours à venir</div>
             <div style={{ color: "var(--muted)", fontSize: 14 }}>
               Aucun parcours documenté pour ce centre dans cette version. Les parcours sont documentés centre par centre,
               rue par rue — jamais inventés.
@@ -125,7 +132,7 @@ export default function CentreDetail({ centre }: { centre: Centre }) {
         </div>
       )}
 
-      <Paywall open={paywallOpen} onClose={() => setPaywallOpen(false)} />
+      {paywallOpen && <Paywall open={paywallOpen} onClose={() => setPaywallOpen(false)} />}
       <Toast message={toast} />
     </>
   );
